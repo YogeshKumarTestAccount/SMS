@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	<context:component-scan base-package="com.seekdigital,com.seekdigital.entity" />
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+	<task:annotation-driven />
+
+	<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"> 
+		<property name="basename" value="messages_en"></property> </bean> -->
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- max upload size in bytes -->
+		<property name="maxUploadSize" value="200971520" /> <!-- 200MB -->
+		<!-- max size of file in memory (in bytes) -->
+		<property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+	</bean>
+	<bean id="sbDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="url"
+			value="jdbc:mysql://localhost/dbschoolmanagementsystem"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="MySQL"></property>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	</bean>
+
+	<bean id="sessionFactory" name="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		lazy-init="false">
+		<property name="dataSource" ref="sbDataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.seekdigital.entity.Mstaffiliation</value>
+				<value>com.seekdigital.entity.Mstbank</value>
+				<value>com.seekdigital.entity.Mstbloodgroup</value>
+				<value>com.seekdigital.entity.Mstcategory</value>
+				<value>com.seekdigital.entity.Mstcity</value>
+				<value>com.seekdigital.entity.Mstcountry</value>
+				<value>com.seekdigital.entity.Mstdisabilitychild</value>
+				<value>com.seekdigital.entity.Mstdocumentsupload</value>
+				<value>com.seekdigital.entity.Mstfeemanagement</value>
+				<value>com.seekdigital.entity.Mstfy</value>
+
+				<value>com.seekdigital.entity.Mstgender</value>
+				<value>com.seekdigital.entity.Msthomework</value>
+				<value>com.seekdigital.entity.Mstleave</value>
+				<value>com.seekdigital.entity.Mstlogin</value>
+				<value>com.seekdigital.entity.Mstmaritalstatus</value>
+				<value>com.seekdigital.entity.Mstmedium</value>
+				<value>com.seekdigital.entity.Mstmothertongue</value>
+				<value>com.seekdigital.entity.Mstquestionandanswer</value>
+				<value>com.seekdigital.entity.Mstregistration</value>
+				<value>com.seekdigital.entity.Mstrelation</value>
+				<value>com.seekdigital.entity.Mstreligion</value>
+
+				<value>com.seekdigital.entity.Mstschool</value>
+				<value>com.seekdigital.entity.Mstschoolconnect</value>
+				<value>com.seekdigital.entity.Mstschooltype</value>
+				<value>com.seekdigital.entity.Mstsemester</value>
+				<value>com.seekdigital.entity.Mstsocialcategory</value>
+				<value>com.seekdigital.entity.Mststate</value>
+				<value>com.seekdigital.entity.Mststream</value>
+				<value>com.seekdigital.entity.Mststudclass</value>
+				<value>com.seekdigital.entity.Mststudclassgroup</value>
+				<value>com.seekdigital.entity.Mststudclasssection</value>
+
+				<value>com.seekdigital.entity.Mststudent</value>
+				<value>com.seekdigital.entity.Mststudenttimetable</value>
+				<value>com.seekdigital.entity.Mstsubcategory</value>
+				<value>com.seekdigital.entity.Mstsubject</value>
+				<value>com.seekdigital.entity.Mstteacheranswer</value>
+				<value>com.seekdigital.entity.Mstteacherinvite</value>
+				<value>com.seekdigital.entity.Mstteacherproject</value>
+				<value>com.seekdigital.entity.Mstteachertimetable</value>
+				<value>com.seekdigital.entity.Mstterms</value>
+				<value>com.seekdigital.entity.Mstuploadstudmarksheet</value>
+
+				<value>com.seekdigital.entity.Tbladdresstype</value>
+				<value>com.seekdigital.entity.Tblbankname</value>
+				<value>com.seekdigital.entity.Tbldaysofweek</value>
+				<value>com.seekdigital.entity.Tblhomework</value>
+				<value>com.seekdigital.entity.Tblinvites</value>
+				<value>com.seekdigital.entity.Tblrolename</value>
+				<value>com.seekdigital.entity.Tblschoolandbranchdetail</value>
+				<value>com.seekdigital.entity.Tblstudentperformance</value>
+				<value>com.seekdigital.entity.Tblstudstaffrecord</value>
+				<value>com.seekdigital.entity.Trnattendancerecord</value>
+
+				<value>com.seekdigital.entity.Tbluserrole</value>
+				<value>com.seekdigital.entity.Trndocumentcategory</value>
+				<value>com.seekdigital.entity.Trndocumenttype</value>
+				<value>com.seekdigital.entity.Trndocumentupload</value>
+				<value>com.seekdigital.entity.Trnstudentleaveapp</value>
+				<value>com.seekdigital.entity.Trnteacherleaveapp</value>
+				<value>com.seekdigital.entity.Mstteachercheckin</value>
+
+				<value>com.seekdigital.entity.FormEntity</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.max_fetch_depth">2</prop>
+				<prop key="hibernate.default_batch_fetch_size">8</prop>
+				<prop key="hibernate.jdbc.batch_size">20</prop>
+				<prop key="hibernate.jdbc.batch_versioned_data">20</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.jdbc.fetch_size">100</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+
+		<property name="host" value="smtp.gmail.com" />
+
+		<property name="port" value="587" />
+
+		<property name="username" value="smsjavaseekdigital@gmail.com" />
+
+		<property name="password" value="seek@123" />
+
+		<property name="javaMailProperties">
+
+			<props>
+
+				<prop key="mail.transport.protocol">smtp</prop>
+
+				<prop key="mail.smtp.auth">true</prop>
+
+				<prop key="mail.smtp.starttls.enable">true</prop>
+
+				<prop key="mail.debug">true</prop>
+
+			</props>
+
+		</property>
+
+	</bean>
+
+</beans> 
